@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<head>
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+</head>
+<body>
+	<h1>POLLING</h1>
+	<dl>
+		<dt>CountUp:</dt>
+		<dd></dd>
+	</dl>
+
+	<script type="text/javascript">
+		$(function() {
+			(function getCountUp() {
+				var sse = new EventSource(
+						"http://localhost:8080/server-sent-events/countUp");
+				sse.addEventListener('message', function(event) {
+					$('dd').text(JSON.parse(event.data).count);
+				});
+			})();
+		});
+	</script>
+</body>
+</html>
